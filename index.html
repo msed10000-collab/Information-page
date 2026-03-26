@@ -1,164 +1,79 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم - استضافة البوتات</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body { background: #f4f6f9; font-family: 'Tahoma', Arial; }
-        .navbar { background: #2c3e50; color: white; }
-        .card { border-radius: 15px; margin-bottom: 20px; }
-        .status-running { color: green; font-weight: bold; }
-        .status-stopped { color: red; font-weight: bold; }
-    </style>
+<meta charset="UTF-8">
+<title>واجهة إدارة البوتات</title>
+<style>
+body { font-family: Arial; background: #f2f2f2; padding: 50px; text-align: center; }
+input, button { padding: 8px; margin: 5px; border-radius: 5px; }
+.bot-card { background: #fff; display: inline-block; padding: 15px; margin: 10px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 300px; text-align: left; }
+h2 { margin-bottom: 10px; }
+</style>
 </head>
 <body>
 
-<nav class="navbar navbar-dark">
-    <div class="container">
-        <span class="navbar-brand">🚀 مدير استضافة البوتات (HTML + API)</span>
-    </div>
-</nav>
+<h1>إدارة عدة بوتات تليجرام</h1>
 
-<div class="container mt-4">
-    <!-- نموذج تسجيل الدخول (كود 121212) -->
-    <div id="loginSection" class="card">
-        <div class="card-header">🔐 الدخول إلى لوحة التحكم</div>
-        <div class="card-body">
-            <input type="password" id="accessCode" class="form-control" placeholder="أدخل كود الدخول (121212)">
-            <button class="btn btn-primary mt-2" onclick="login()">دخول</button>
-            <div id="loginError" class="text-danger mt-2"></div>
-        </div>
-    </div>
+<div id="botsContainer"></div>
 
-    <!-- المحتوى المخفي بعد الدخول -->
-    <div id="dashboardContent" style="display: none;">
-        <!-- رفع بوت جديد -->
-        <div class="card">
-            <div class="card-header">📤 رفع بوت جديد (PHP)</div>
-            <div class="card-body">
-                <form id="uploadForm" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <input type="text" name="bot_name" class="form-control" placeholder="اسم البوت">
-                        </div>
-                        <div class="col-md-4">
-                            <input type="file" name="bot_file" class="form-control" accept=".php" required>
-                        </div>
-                        <div class="col-md-3">
-                            <select name="parent_id" class="form-select" id="parentSelect">
-                                <option value="">-- بدون أب --</option>
-                            </select>
-                        </div>
-                        <div class="col-md-1">
-                            <button type="submit" class="btn btn-primary">رفع</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <!-- قائمة البوتات -->
-        <div class="card">
-            <div class="card-header d-flex justify-content-between">
-                <span>🤖 البوتات المضافة</span>
-                <button class="btn btn-sm btn-secondary" onclick="loadBots()">🔄 تحديث</button>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr><th>الاسم</th><th>الملف</th><th>الحالة</th><th>الإجراءات</th></tr>
-                        </thead>
-                        <tbody id="botsList"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<button onclick="addBot()">➕ إضافة بوت جديد</button>
 
 <script>
-    const API_URL = 'api.php'; // الملف الخلفي PHP
+let bots = [
+    {name: "بوت التجربة", token: "", chatId: "", message: "مرحبًا من بوت التجربة"},
+    {name: "بوت استضافة ملفات", token: "", chatId: "", message: "هنا رابط الملف: https://example.com/file.zip"}
+];
 
-    // تسجيل الدخول
-    function login() {
-        const code = document.getElementById('accessCode').value;
-        if (code === '121212') {
-            document.getElementById('loginSection').style.display = 'none';
-            document.getElementById('dashboardContent').style.display = 'block';
-            loadBots();
-            loadParents();
-        } else {
-            document.getElementById('loginError').innerText = 'كود خاطئ';
-        }
+function renderBots() {
+    const container = document.getElementById("botsContainer");
+    container.innerHTML = "";
+    bots.forEach((bot, index) => {
+        const botDiv = document.createElement("div");
+        botDiv.className = "bot-card";
+        botDiv.innerHTML = `
+            <h2>${bot.name}</h2>
+            <input type="text" placeholder="توكن البوت" value="${bot.token}" id="token${index}"><br>
+            <input type="text" placeholder="Chat ID" value="${bot.chatId}" id="chatId${index}"><br>
+            <input type="text" placeholder="الرسالة" value="${bot.message}" id="msg${index}"><br>
+            <button onclick="sendMessage(${index})">إرسال رسالة</button>
+            <div id="status${index}" style="margin-top:5px;"></div>
+        `;
+        container.appendChild(botDiv);
+    });
+}
+
+function addBot() {
+    bots.push({name: "بوت جديد", token: "", chatId: "", message: ""});
+    renderBots();
+}
+
+function sendMessage(index) {
+    const token = document.getElementById("token"+index).value;
+    const chatId = document.getElementById("chatId"+index).value;
+    const text = document.getElementById("msg"+index).value;
+
+    if(!token || !chatId || !text){
+        alert("يرجى ملء جميع الحقول!");
+        return;
     }
 
-    // تحميل قائمة البوتات
-    async function loadBots() {
-        const resp = await fetch(`${API_URL}?action=list`);
-        const data = await resp.json();
-        const tbody = document.getElementById('botsList');
-        tbody.innerHTML = '';
-        for (let id in data) {
-            const bot = data[id];
-            const row = tbody.insertRow();
-            row.insertCell(0).innerText = bot.name;
-            row.insertCell(1).innerText = bot.script;
-            row.insertCell(2).innerHTML = `<span class="status-${bot.status}">${bot.status === 'running' ? 'يعمل' : 'متوقف'}</span>`;
-            const actions = row.insertCell(3);
-            if (bot.status !== 'running')
-                actions.innerHTML += `<button class="btn btn-sm btn-success" onclick="controlBot('start','${id}')">▶ تشغيل</button> `;
-            else
-                actions.innerHTML += `<button class="btn btn-sm btn-danger" onclick="controlBot('stop','${id}')">⏹ إيقاف</button> `;
-            actions.innerHTML += `<button class="btn btn-sm btn-warning" onclick="controlBot('restart','${id}')">🔄 إعادة</button> `;
-            actions.innerHTML += `<button class="btn btn-sm btn-danger" onclick="deleteBot('${id}')">🗑 حذف</button>`;
-        }
-    }
+    fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: chatId, text: text })
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("status"+index).innerHTML = `✅ تم الإرسال: ${JSON.stringify(data)}`;
+    })
+    .catch(err => {
+        document.getElementById("status"+index).innerHTML = `❌ حدث خطأ (CORS أو توكن خاطئ)`;
+    });
+}
 
-    // تحميل قائمة الآباء لاختيار "الأطفال"
-    async function loadParents() {
-        const resp = await fetch(`${API_URL}?action=list`);
-        const data = await resp.json();
-        const select = document.getElementById('parentSelect');
-        select.innerHTML = '<option value="">-- بدون أب --</option>';
-        for (let id in data) {
-            select.innerHTML += `<option value="${id}">${data[id].name}</option>`;
-        }
-    }
-
-    // التحكم بالبوت (start/stop/restart)
-    async function controlBot(action, id) {
-        const resp = await fetch(`${API_URL}?action=${action}&id=${id}`);
-        const result = await resp.json();
-        alert(result.message);
-        loadBots();
-    }
-
-    // حذف بوت
-    async function deleteBot(id) {
-        if (!confirm('هل أنت متأكد من حذف هذا البوت نهائياً؟')) return;
-        const resp = await fetch(`${API_URL}?action=delete&id=${id}`);
-        const result = await resp.json();
-        alert(result.message);
-        loadBots();
-        loadParents();
-    }
-
-    // رفع ملف بوت جديد
-    document.getElementById('uploadForm').onsubmit = async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        formData.append('action', 'upload');
-        const resp = await fetch(API_URL, { method: 'POST', body: formData });
-        const result = await resp.json();
-        alert(result.message);
-        if (result.success) {
-            loadBots();
-            loadParents();
-        }
-    };
+// أول مرة تعرض البوتات
+renderBots();
 </script>
+
 </body>
 </html>
