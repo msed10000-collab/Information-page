@@ -1,79 +1,324 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="ltr">
 <head>
-<meta charset="UTF-8">
-<title>واجهة إدارة البوتات</title>
-<style>
-body { font-family: Arial; background: #f2f2f2; padding: 50px; text-align: center; }
-input, button { padding: 8px; margin: 5px; border-radius: 5px; }
-.bot-card { background: #fff; display: inline-block; padding: 15px; margin: 10px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 300px; text-align: left; }
-h2 { margin-bottom: 10px; }
-</style>
-</head>
-<body>
-
-<h1>إدارة عدة بوتات تليجرام</h1>
-
-<div id="botsContainer"></div>
-
-<button onclick="addBot()">➕ إضافة بوت جديد</button>
-
-<script>
-let bots = [
-    {name: "بوت التجربة", token: "", chatId: "", message: "مرحبًا من بوت التجربة"},
-    {name: "بوت استضافة ملفات", token: "", chatId: "", message: "هنا رابط الملف: https://example.com/file.zip"}
-];
-
-function renderBots() {
-    const container = document.getElementById("botsContainer");
-    container.innerHTML = "";
-    bots.forEach((bot, index) => {
-        const botDiv = document.createElement("div");
-        botDiv.className = "bot-card";
-        botDiv.innerHTML = `
-            <h2>${bot.name}</h2>
-            <input type="text" placeholder="توكن البوت" value="${bot.token}" id="token${index}"><br>
-            <input type="text" placeholder="Chat ID" value="${bot.chatId}" id="chatId${index}"><br>
-            <input type="text" placeholder="الرسالة" value="${bot.message}" id="msg${index}"><br>
-            <button onclick="sendMessage(${index})">إرسال رسالة</button>
-            <div id="status${index}" style="margin-top:5px;"></div>
-        `;
-        container.appendChild(botDiv);
-    });
-}
-
-function addBot() {
-    bots.push({name: "بوت جديد", token: "", chatId: "", message: ""});
-    renderBots();
-}
-
-function sendMessage(index) {
-    const token = document.getElementById("token"+index).value;
-    const chatId = document.getElementById("chatId"+index).value;
-    const text = document.getElementById("msg"+index).value;
-
-    if(!token || !chatId || !text){
-        alert("يرجى ملء جميع الحقول!");
-        return;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>منصاتي | روابط التواصل الاحترافية</title>
+  <!-- Google Fonts: Poppins + Tajawal (للدعم العربي الأنيق) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (Free Icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: chatId, text: text })
-    })
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById("status"+index).innerHTML = `✅ تم الإرسال: ${JSON.stringify(data)}`;
-    })
-    .catch(err => {
-        document.getElementById("status"+index).innerHTML = `❌ حدث خطأ (CORS أو توكن خاطئ)`;
-    });
-}
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 10% 20%, rgba(10, 20, 35, 1) 0%, rgba(2, 10, 22, 0.95) 100%);
+      background-attachment: fixed;
+      font-family: 'Poppins', 'Tajawal', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+    }
 
-// أول مرة تعرض البوتات
-renderBots();
-</script>
+    /* أناقة خلفية متحركة خفيفة (جزيئات ضبابية) */
+    body::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-image: radial-gradient(circle at 30% 40%, rgba(255,255,240,0.02) 2%, transparent 2.5%),
+                        radial-gradient(circle at 70% 85%, rgba(200,180,255,0.02) 1.5%, transparent 2%);
+      background-size: 55px 55px, 35px 35px;
+      pointer-events: none;
+      z-index: 0;
+    }
 
+    /* الحاوية الرئيسية */
+    .glass-container {
+      max-width: 1200px;
+      width: 100%;
+      background: rgba(15, 25, 45, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+      padding: 2.5rem 2rem;
+      transition: all 0.3s ease;
+      z-index: 2;
+    }
+
+    /* رأس الصفحة */
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .header h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #FFFFFF, #B2BBE0, #6C8CD9);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.6rem;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .header p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.75);
+      font-weight: 500;
+      background: rgba(255,255,245,0.08);
+      display: inline-block;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      backdrop-filter: blur(4px);
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    /* شبكة الروابط الاحترافية */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.8rem;
+      margin-top: 1rem;
+    }
+
+    /* تصميم البطاقة لكل منصة */
+    .platform-card {
+      background: rgba(12, 20, 30, 0.55);
+      backdrop-filter: blur(8px);
+      border-radius: 2rem;
+      padding: 1.8rem 1.2rem;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* تأثير تموج خلفي عند الهوفر */
+    .platform-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.15), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+
+    .platform-card:hover::before {
+      opacity: 1;
+    }
+
+    /* أيقونة ضخمة */
+    .platform-icon {
+      font-size: 3.5rem;
+      transition: transform 0.3s ease, color 0.25s;
+      margin-bottom: 0.3rem;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    }
+
+    /* اسم المنصة */
+    .platform-name {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: #F0F3FA;
+      transition: color 0.25s;
+      font-family: 'Poppins', 'Tajawal', sans-serif;
+    }
+
+    /* معرف الحساب (تذييل صغير) */
+    .platform-username {
+      font-size: 0.85rem;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      color: #CBD5E6;
+      transition: all 0.25s;
+      direction: ltr;
+      display: inline-block;
+      margin-top: 0.2rem;
+      backdrop-filter: blur(2px);
+    }
+
+    /* تأثير hover عام */
+    .platform-card:hover {
+      transform: translateY(-12px);
+      background: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 28px 35px -12px rgba(0, 0, 0, 0.4);
+    }
+
+    /* تغيير الألوان حسب المنصة عند hover (نص + ايقونة) */
+    /* فيسبوك */
+    .platform-card:hover .platform-icon,
+    .platform-card:hover .platform-name {
+      color: #1877F2;
+    }
+    /* انستغرام */
+    .platform-card.insta-card:hover .platform-icon,
+    .platform-card.insta-card:hover .platform-name {
+      color: #E4405F;
+    }
+    /* تليجرام */
+    .platform-card.tele-card:hover .platform-icon,
+    .platform-card.tele-card:hover .platform-name {
+      color: #26A5E4;
+    }
+    /* تيك توك */
+    .platform-card.tiktok-card:hover .platform-icon,
+    .platform-card.tiktok-card:hover .platform-name {
+      color: #000000;
+    }
+
+    /* عند hover تغيير لون الخلفية لاسم المستخدم وتفتيحه */
+    .platform-card:hover .platform-username {
+      background: rgba(0, 0, 0, 0.08);
+      color: #1e2a3a;
+      font-weight: 600;
+    }
+
+    /* تحسين خاص لتيك توك لأن اللون الأسود يحتاج تباين عند hover */
+    .platform-card.tiktok-card:hover .platform-username {
+      background: rgba(0, 0, 0, 0.1);
+      color: #111;
+    }
+
+    /* تنسيق خاص للهواتف */
+    @media (max-width: 680px) {
+      .glass-container {
+        padding: 1.8rem 1.2rem;
+      }
+      .header h1 {
+        font-size: 2rem;
+      }
+      .platform-name {
+        font-size: 1.4rem;
+      }
+      .platform-icon {
+        font-size: 2.8rem;
+      }
+      .links-grid {
+        gap: 1.2rem;
+        grid-template-columns: 1fr;
+      }
+      .platform-card {
+        padding: 1.4rem 1rem;
+      }
+    }
+
+    /* شريط سفلي أنيق */
+    .footer-note {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: rgba(210, 220, 250, 0.6);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1.8rem;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+    .footer-note i {
+      font-size: 0.7rem;
+      margin: 0 4px;
+    }
+
+    /* تأثير دخول خفيف */
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .platform-card {
+      animation: fadeUp 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+      opacity: 0;
+    }
+    .platform-card:nth-child(1) { animation-delay: 0.05s; }
+    .platform-card:nth-child(2) { animation-delay: 0.15s; }
+    .platform-card:nth-child(3) { animation-delay: 0.25s; }
+    .platform-card:nth-child(4) { animation-delay: 0.35s; }
+  </style>
+</head>
+<body>
+  <div class="glass-container">
+    <div class="header">
+      <h1>✨ منصاتي الرقمية ✨</h1>
+      <p>تواصل معي عبر القنوات المفضلة</p>
+    </div>
+
+    <div class="links-grid">
+      <!-- 1. Facebook -->
+      <a href="https://www.facebook.com/profile.php?id=100088533197594" 
+         class="platform-card fb-card" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         aria-label="Facebook profile">
+        <i class="fab fa-facebook-f platform-icon"></i>
+        <span class="platform-name">Facebook</span>
+        <span class="platform-username">@ الملف الشخصي</span>
+      </a>
+
+      <!-- 2. Instagram -->
+      <a href="https://www.instagram.com/6w2.t?igsh=MXJxbHN3ZHZsb29tOA==" 
+         class="platform-card insta-card" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         aria-label="Instagram account">
+        <i class="fab fa-instagram platform-icon"></i>
+        <span class="platform-name">Instagram</span>
+        <span class="platform-username">@6w2.t</span>
+      </a>
+
+      <!-- 3. Telegram -->
+      <a href="https://t.me/ct_5t" 
+         class="platform-card tele-card" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         aria-label="Telegram channel">
+        <i class="fab fa-telegram platform-icon"></i>
+        <span class="platform-name">Telegram</span>
+        <span class="platform-username">@ct_5t</span>
+      </a>
+
+      <!-- 4. TikTok -->
+      <a href="https://www.tiktok.com/@massoud2_dz" 
+         class="platform-card tiktok-card" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         aria-label="TikTok account">
+        <i class="fab fa-tiktok platform-icon"></i>
+        <span class="platform-name">TikTok</span>
+        <span class="platform-username">@massoud2_dz</span>
+      </a>
+    </div>
+
+    <div class="footer-note">
+      <i class="fas fa-link"></i> جميع الروابط نشطة | تواصل معي بكل سهولة <i class="fas fa-heart" style="color: #ff6b6b; font-size: 0.7rem;"></i>
+    </div>
+  </div>
 </body>
 </html>
