@@ -70,7 +70,6 @@
           const testUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
           const testPayload = {
             chat_id: CHAT_ID,
-            text: '🔄 تم تفعيل نظام الرسائل بنجاح! هذه رسالة اختبارية.',
           };
           const testResponse = await fetch(testUrl, {
             method: 'POST',
