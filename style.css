@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #0b1220 0%, #0a0f1a 100%);
+  font-family: 'Poppins', 'Tajawal', sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.glass-container {
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  background: linear-gradient(45deg, #fff, #26A5E4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 1px;
+}
+
+/* شبكة الأزرار */
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+/* تنسيق أزرار المنصات */
+.platform-card {
+  background: rgba(17, 26, 46, 0.7);
+  backdrop-filter: blur(8px);
+  padding: 18px 12px;
+  border-radius: 28px;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(38, 165, 228, 0.3);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.platform-card i {
+  font-size: 1.5rem;
+  transition: transform 0.2s;
+}
+
+.platform-card:hover {
+  background: white;
+  color: #0b1220;
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(38, 165, 228, 0.3);
+  border-color: transparent;
+}
+
+.platform-card:hover i {
+  transform: scale(1.1);
+}
+
+/* صندوق الرسائل */
+.msg-box {
+  background: rgba(17, 26, 46, 0.6);
+  backdrop-filter: blur(5px);
+  padding: 25px;
+  border-radius: 32px;
+  margin-top: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.msg-box h3 {
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+textarea {
+  width: 100%;
+  height: 110px;
+  background: #0f1422;
+  border: 1px solid #26A5E4;
+  border-radius: 24px;
+  padding: 15px;
+  color: white;
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical;
+  transition: 0.2s;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #ff7b00;
+  box-shadow: 0 0 12px rgba(255, 123, 0, 0.4);
+}
+
+/* زر الإرسال المعدل */
+button {
+  margin-top: 20px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 40px;
+  background: linear-gradient(95deg, #26A5E4, #7c3aed);
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 5px 15px rgba(38, 165, 228, 0.3);
+}
+
+button i {
+  font-size: 1.1rem;
+  transition: transform 0.2s;
+}
+
+button:hover {
+  transform: scale(1.02);
+  background: linear-gradient(95deg, #1f8fc7, #6a2fdf);
+  box-shadow: 0 8px 25px rgba(38, 165, 228, 0.5);
+}
+
+button:hover i {
+  transform: translateX(4px);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* استجابة للشاشات الصغيرة */
+@media (max-width: 550px) {
+  .links-grid {
+    gap: 12px;
+  }
+  .platform-card {
+    padding: 14px 8px;
+    font-size: 1rem;
+  }
+  h1 {
+    font-size: 1.8rem;
+  }
+}
