@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>منصاتي | لوحة الروابط</title>
+  <title>✨ منصاتي الرقمية ✨</title>
   <!-- الخطوط -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
   <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- ملف CSS الخارجي -->
@@ -13,34 +13,35 @@
 </head>
 <body>
   <div class="glass-container">
-    <h1>✨ منصاتي ✨</h1>
+    <div class="header">
+      <h1>✨ منصاتي الرقمية ✨</h1>
+      <p>تواصل معي عبر قنواتي المفضلة أو أرسل رسالة مجهولة</p>
+    </div>
 
     <div class="links-grid">
-      <a href="https://facebook.com" class="platform-card" target="_blank">
+      <a href="https://facebook.com" class="platform-card fb-card" target="_blank">
         <i class="fab fa-facebook-f"></i> Facebook
       </a>
-      <a href="https://instagram.com" class="platform-card" target="_blank">
+      <a href="https://instagram.com" class="platform-card insta-card" target="_blank">
         <i class="fab fa-instagram"></i> Instagram
       </a>
-      <a href="https://t.me/ct_5t" class="platform-card" target="_blank">
+      <a href="https://t.me/ct_5t" class="platform-card tele-card" target="_blank">
         <i class="fab fa-telegram-plane"></i> Telegram
       </a>
-      <a href="https://tiktok.com" class="platform-card" target="_blank">
+      <a href="https://tiktok.com" class="platform-card tiktok-card" target="_blank">
         <i class="fab fa-tiktok"></i> TikTok
       </a>
     </div>
 
-    <!-- نموذج الرسائل المجهولة -->
     <div class="msg-box">
       <h3>📩 أرسل رسالة مجهولة</h3>
       <textarea id="msg" placeholder="اكتب رسالتك هنا..."></textarea>
-      <button id="sendBtn">
-        <i class="fas fa-paper-plane"></i> إرسال
-      </button>
+      <button id="sendBtn"><i class="fas fa-paper-plane"></i> إرسال</button>
+      <div id="alertBox" class="alert-box"></div>
     </div>
   </div>
 
   <!-- ملف JS الخارجي -->
   <script src="script.js"></script>
 </body>
-</html>
+                                                                     </html>
