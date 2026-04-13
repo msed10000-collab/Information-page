@@ -5,121 +5,151 @@
 }
 
 body {
-    background: linear-gradient(145deg, #f8fafc 0%, #eef2ff 100%);
     font-family: 'Cairo', sans-serif;
+    background: radial-gradient(circle at 10% 30%, #0f172a, #030712);
     min-height: 100vh;
-    padding: 2rem 1rem;
-    color: #0f172a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+    position: relative;
+    color: #f1f5f9;
+}
+
+/* خلفية متحركة بنقاط ضبابية */
+body::before {
+    content: '';
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle at 40% 60%, rgba(99, 102, 241, 0.15), transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1), transparent 55%);
+    animation: drift 25s infinite alternate;
+    z-index: 0;
+}
+
+@keyframes drift {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(2%, 3%) rotate(2deg); }
 }
 
 .container {
-    max-width: 880px;
+    position: relative;
+    z-index: 2;
+    max-width: 860px;
+    width: 100%;
     margin: 0 auto;
 }
 
+/* بطاقة الترحيب */
 .hero {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3rem;
+    padding: 1.5rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
 
 .hero h1 {
-    font-size: 2.2rem;
+    font-size: 2.3rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #1e1b4b, #4f46e5);
+    background: linear-gradient(125deg, #ffffff, #c084fc, #a78bfa);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     margin-bottom: 0.5rem;
+    letter-spacing: -0.5px;
 }
 
 .hero p {
-    color: #475569;
+    color: #cbd5e1;
     font-weight: 500;
+    font-size: 1rem;
 }
 
-/* شبكة الروابط الاجتماعية - 4 منصات */
+/* شبكة الروابط - تصميم بطاقات زجاجية */
 .social-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2.5rem;
+    gap: 1.25rem;
+    margin-bottom: 3rem;
 }
 
 .social-card {
-    background: white;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(12px);
     border-radius: 2rem;
     padding: 0.9rem 1.8rem;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     text-decoration: none;
-    color: #1e293b;
-    font-weight: 600;
-    font-size: 1.1rem;
-    transition: all 0.25s;
-    box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #eef2ff;
+    font-weight: 700;
+    font-size: 1.05rem;
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    color: white;
 }
 
 .social-card i {
     font-size: 1.7rem;
-    transition: transform 0.2s;
+    transition: transform 0.25s, filter 0.2s;
 }
 
 .social-card span {
-    font-weight: 700;
+    letter-spacing: 0.3px;
 }
 
 .social-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px) scale(1.02);
+    background: rgba(30, 41, 59, 0.85);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5);
 }
 
 .social-card:hover i {
-    transform: scale(1.08);
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
 }
 
-/* ألوان المنصات الأربعة */
+/* ألوان خاصة لكل منصة مع الحفاظ على التصميم الزجاجي */
 .social-card.instagram {
-    background: linear-gradient(45deg, #f09433, #d62976, #962fbf);
-    color: white;
-    border: none;
+    background: linear-gradient(135deg, rgba(240, 147, 51, 0.75), rgba(210, 41, 118, 0.75), rgba(150, 47, 191, 0.75));
+    backdrop-filter: blur(8px);
 }
-
 .social-card.tiktok {
-    background: #010101;
-    color: white;
-    border: none;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    border-color: rgba(255, 255, 255, 0.3);
 }
-
 .social-card.facebook {
-    background: #1877F2;
-    color: white;
-    border: none;
+    background: rgba(24, 119, 242, 0.75);
+    backdrop-filter: blur(8px);
 }
-
 .social-card.telegram {
-    background: #26A5E4;
-    color: white;
-    border: none;
+    background: rgba(38, 165, 228, 0.75);
+    backdrop-filter: blur(8px);
 }
 
-/* قسم الرسائل المجهولة */
+/* قسم الرسائل المجهولة - تصميم زجاجي فاخر */
 .message-section {
-    margin-top: 0.5rem;
-    width: 100%;
-    max-width: 680px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-top: 0.8rem;
 }
 
 .glass-card {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(2px);
-    border-radius: 2rem;
-    box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    border-radius: 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s;
 }
 
 .message-card {
@@ -129,53 +159,66 @@ body {
 
 .message-icon {
     font-size: 3rem;
-    color: #4f46e5;
-    background: linear-gradient(145deg, #e0e7ff, #c7d2fe);
-    width: 80px;
-    height: 80px;
+    background: linear-gradient(145deg, #4f46e5, #7c3aed);
+    width: 85px;
+    height: 85px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 40px;
+    border-radius: 50%;
     margin: 0 auto 1.2rem;
-    box-shadow: 0 12px 20px -10px rgba(79, 70, 229, 0.3);
+    box-shadow: 0 15px 25px -8px rgba(79, 70, 229, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.message-icon i {
+    color: white;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
 }
 
 .message-card h3 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #0f172a;
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: #ffffff;
     margin-bottom: 0.5rem;
+    letter-spacing: -0.3px;
 }
 
 .message-card p {
-    color: #475569;
-    margin-bottom: 1.6rem;
-    font-size: 1rem;
+    color: #cbd5e6;
+    margin-bottom: 1.8rem;
+    font-size: 0.95rem;
 }
 
 .input-group {
-    margin-bottom: 1.5rem;
-    text-align: right;
+    margin-bottom: 1.6rem;
 }
 
 textarea {
     width: 100%;
-    border-radius: 1.5rem;
-    border: 1.5px solid #e2e8f0;
-    background: #ffffff;
-    padding: 1rem 1.2rem;
+    border-radius: 1.8rem;
+    border: none;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    padding: 1rem 1.4rem;
     font-family: 'Cairo', monospace;
     font-size: 1rem;
     resize: vertical;
     transition: all 0.2s;
     outline: none;
-    color: #1e293b;
+    color: #f1f5f9;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 textarea:focus {
-    border-color: #8b5cf6;
-    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+    border-color: #a78bfa;
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.3);
+}
+
+textarea::placeholder {
+    color: #94a3b8;
+    font-weight: 400;
 }
 
 button {
@@ -183,29 +226,29 @@ button {
     border: none;
     padding: 0.9rem 1.8rem;
     border-radius: 3rem;
-    font-weight: 700;
+    font-weight: 800;
     font-size: 1rem;
     color: white;
     width: 100%;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.25s;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
     font-family: 'Cairo', sans-serif;
-    box-shadow: 0 8px 18px -6px #4f46e5;
+    box-shadow: 0 8px 20px -5px #4f46e5;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 button i {
     font-size: 1.2rem;
-    transition: transform 0.2s;
 }
 
 button:hover {
     background: linear-gradient(95deg, #6366f1, #8b5cf6);
     transform: scale(0.98);
-    box-shadow: 0 4px 12px -4px #4f46e5;
+    box-shadow: 0 4px 12px -2px #6366f1;
 }
 
 button:active {
@@ -216,54 +259,60 @@ button:active {
     margin-top: 1.4rem;
     padding: 0.8rem;
     border-radius: 2rem;
-    font-weight: 500;
+    font-weight: 600;
     text-align: center;
-    font-size: 0.9rem;
-    transition: all 0.2s;
+    font-size: 0.85rem;
     display: none;
+    backdrop-filter: blur(8px);
 }
 
 .status-success {
-    background: #e6f9ed;
-    color: #0e6245;
-    border-right: 4px solid #10b981;
+    background: rgba(16, 185, 129, 0.2);
+    color: #a7f3d0;
+    border-right: 3px solid #10b981;
 }
 
 .status-error {
-    background: #fee9e6;
-    color: #b91c1c;
-    border-right: 4px solid #ef4444;
+    background: rgba(239, 68, 68, 0.2);
+    color: #fecaca;
+    border-right: 3px solid #ef4444;
 }
 
 .info-note {
-    margin-top: 1.2rem;
-    font-size: 0.75rem;
-    color: #5b6e8c;
-    background: #f1f5f9;
+    margin-top: 1.3rem;
+    font-size: 0.7rem;
+    color: #9ca3af;
+    background: rgba(0, 0, 0, 0.3);
     padding: 0.5rem 1rem;
     border-radius: 2rem;
     display: inline-block;
     width: auto;
+    backdrop-filter: blur(4px);
 }
 
 footer {
     text-align: center;
-    margin-top: 2.5rem;
-    font-size: 0.8rem;
+    margin-top: 2.8rem;
+    font-size: 0.7rem;
     color: #6c757d;
-    opacity: 0.7;
+    opacity: 0.6;
+    backdrop-filter: blur(4px);
 }
 
 @media (max-width: 640px) {
-    .social-card {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.9rem;
-    }
-    .social-card i {
-        font-size: 1.4rem;
+    body {
+        padding: 1.5rem 1rem;
     }
     .hero h1 {
-        font-size: 1.9rem;
+        font-size: 1.7rem;
+    }
+    .social-card {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+        gap: 8px;
+    }
+    .social-card i {
+        font-size: 1.3rem;
     }
     .message-card {
         padding: 1.5rem;
@@ -271,4 +320,9 @@ footer {
     .message-card h3 {
         font-size: 1.5rem;
     }
-  }
+    .message-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 2.5rem;
+    }
+    }
