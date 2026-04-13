@@ -181,6 +181,224 @@ body::before {
   color: #111;
 }
 
+/* قسم الرسالة المجهولة (الوهمية) */
+.anonymous-message-section {
+  margin-top: 3rem;
+  background: rgba(10, 20, 35, 0.6);
+  backdrop-filter: blur(8px);
+  border-radius: 2rem;
+  padding: 1.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.section-title {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #FFE6B0;
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.section-title i {
+  font-size: 1.5rem;
+  color: #F5B042;
+}
+
+.anon-desc {
+  text-align: center;
+  color: rgba(230, 240, 255, 0.8);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #CCDDFF;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 1.2rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #ffffff;
+  font-family: 'Poppins', 'Tajawal', sans-serif;
+  font-size: 0.95rem;
+  resize: vertical;
+  transition: 0.2s;
+}
+
+.form-group textarea:focus {
+  outline: none;
+  border-color: #F5B042;
+  background: rgba(0,0,0,0.5);
+}
+
+.send-btn {
+  background: linear-gradient(135deg, #2E5A9E, #1E3A6F);
+  border: none;
+  padding: 0.8rem 1.8rem;
+  border-radius: 3rem;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.25s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+  width: 100%;
+  justify-content: center;
+}
+
+.send-btn:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #3A6EB8, #2A4A8A);
+  box-shadow: 0 10px 20px -5px rgba(0,0,0,0.4);
+}
+
+.form-status {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.footer-note {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: rgba(210, 220, 250, 0.6);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+.footer-note i {
+  font-size: 0.7rem;
+  margin: 0 4px;
+}
+
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.platform-card {
+  animation: fadeUp 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+  opacity: 0;
+}
+.platform-card:nth-child(1) { animation-delay: 0.05s; }
+.platform-card:nth-child(2) { animation-delay: 0.15s; }
+.platform-card:nth-child(3) { animation-delay: 0.25s; }
+.platform-card:nth-child(4) { animation-delay: 0.35s; }
+
+@media (max-width: 680px) {
+  .glass-container {
+    padding: 1.8rem 1.2rem;
+  }
+  .header h1 {
+    font-size: 2rem;
+  }
+  .platform-name {
+    font-size: 1.4rem;
+  }
+  .platform-icon {
+    font-size: 2.8rem;
+  }
+  .links-grid {
+    gap: 1.2rem;
+    grid-template-columns: 1fr;
+  }
+  .platform-card {
+    padding: 1.4rem 1rem;
+  }
+  .section-title {
+    font-size: 1.3rem;
+  }
+  }}
+
+.platform-card:hover::before {
+  opacity: 1;
+}
+
+.platform-icon {
+  font-size: 3.5rem;
+  transition: transform 0.3s ease, color 0.25s;
+  margin-bottom: 0.3rem;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.platform-name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: #F0F3FA;
+  transition: color 0.25s;
+  font-family: 'Poppins', 'Tajawal', sans-serif;
+}
+
+.platform-username {
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.3rem 1rem;
+  border-radius: 40px;
+  color: #CBD5E6;
+  transition: all 0.25s;
+  direction: ltr;
+  display: inline-block;
+  margin-top: 0.2rem;
+  backdrop-filter: blur(2px);
+}
+
+.platform-card:hover {
+  transform: translateY(-12px);
+  background: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 28px 35px -12px rgba(0, 0, 0, 0.4);
+}
+
+.platform-card:hover .platform-icon,
+.platform-card:hover .platform-name {
+  color: #1877F2;
+}
+.platform-card.insta-card:hover .platform-icon,
+.platform-card.insta-card:hover .platform-name {
+  color: #E4405F;
+}
+.platform-card.tele-card:hover .platform-icon,
+.platform-card.tele-card:hover .platform-name {
+  color: #26A5E4;
+}
+.platform-card.tiktok-card:hover .platform-icon,
+.platform-card.tiktok-card:hover .platform-name {
+  color: #000000;
+}
+
+.platform-card:hover .platform-username {
+  background: rgba(0, 0, 0, 0.08);
+  color: #1e2a3a;
+  font-weight: 600;
+}
+
+.platform-card.tiktok-card:hover .platform-username {
+  background: rgba(0, 0, 0, 0.1);
+  color: #111;
+}
+
 /* قسم الرسالة المجهولة - إضافات جديدة */
 .anonymous-message-section {
   margin-top: 3rem;
