@@ -12,6 +12,7 @@ body {
   align-items: center;
   padding: 16px;
   background: radial-gradient(circle at 10% 20%, #0a0f1a, #0b1220);
+  position: relative;
 }
 
 body::before {
@@ -24,22 +25,26 @@ body::before {
   background-image: radial-gradient(rgba(79, 172, 254, 0.08) 1px, transparent 1px);
   background-size: 40px 40px;
   pointer-events: none;
+  z-index: 0;
 }
 
 .glass-container {
+  position: relative;
+  z-index: 2;
   width: 100%;
   max-width: 950px;
   background: rgba(15, 25, 45, 0.45);
   backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-radius: 40px;
-  padding: 24px 20px;
+  padding: 28px 24px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4);
   transition: all 0.3s;
 }
 
 .header h1 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   background: linear-gradient(135deg, #fff, #4facfe, #00c6fb);
   -webkit-background-clip: text;
   background-clip: text;
@@ -49,18 +54,19 @@ body::before {
 }
 
 .header p {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.75);
   margin-bottom: 28px;
   border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
   display: inline-block;
-  padding-bottom: 6px;
+  padding-bottom: 8px;
 }
 
+/* شبكة الروابط */
 .links-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 16px;
+  gap: 18px;
   margin-bottom: 35px;
 }
 
@@ -74,240 +80,61 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   transition: all 0.25s ease;
   background: rgba(20, 30, 50, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
 }
 
 .platform-card i {
-  font-size: 1.4rem;
-  transition: 0.2s;
+  font-size: 1.5rem;
+  transition: all 0.2s;
 }
 
-/* ألوان hover لكل منصة */
+/* تأثيرات hover لكل منصة */
 .fb-card:hover {
   background: #1877f2;
   transform: translateY(-4px);
-  box-shadow: 0 12px 20px -8px #1877f2;
+  box-shadow: 0 15px 25px -8px #1877f2;
   border-color: transparent;
 }
 
 .insta-card:hover {
   background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af);
   transform: translateY(-4px);
-  box-shadow: 0 12px 20px -8px #dd2a7b;
+  box-shadow: 0 15px 25px -8px #dd2a7b;
   border-color: transparent;
 }
 
 .tele-card:hover {
   background: #0088cc;
   transform: translateY(-4px);
-  box-shadow: 0 12px 20px -8px #0088cc;
+  box-shadow: 0 15px 25px -8px #0088cc;
   border-color: transparent;
 }
 
 .tiktok-card:hover {
   background: #010101;
   transform: translateY(-4px);
-  box-shadow: 0 12px 20px -8px #69c9d0;
+  box-shadow: 0 15px 25px -8px #69c9d0;
   border-color: #69c9d0;
 }
 
 .platform-card:hover i {
-  transform: scale(1.1);
-}
-
-.msg-box {
-  background: rgba(10, 18, 28, 0.6);
-  backdrop-filter: blur(10px);
-  padding: 20px 18px;
-  border-radius: 32px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.msg-box h3 {
-  font-size: 1.3rem;
-  margin-bottom: 16px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.msg-box h3 i {
-  color: #4facfe;
-}
-
-textarea {
-  width: 100%;
-  height: 110px;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1.5px solid rgba(79, 172, 254, 0.5);
-  border-radius: 28px;
-  padding: 14px 16px;
-  color: white;
-  font-family: inherit;
-  font-size: 0.95rem;
-  resize: vertical;
-  transition: 0.2s;
-}
-
-textarea:focus {
-  outline: none;
-  border-color: #ff9f4a;
-  box-shadow: 0 0 12px rgba(255, 159, 74, 0.4);
-}
-
-button {
-  margin-top: 18px;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 50px;
-  background: linear-gradient(95deg, #4facfe, #7c3aed);
-  color: white;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 6px 14px rgba(79, 172, 254, 0.3);
-  transition: all 0.2s ease;
-}
-
-button i {
-  font-size: 1rem;
-  transition: transform 0.2s;
-}
-
-button:hover {
-  transform: scale(1.02);
-  background: linear-gradient(95deg, #3a9be0, #6a2fdf);
-  box-shadow: 0 8px 20px rgba(79, 172, 254, 0.5);
-}
-
-button:hover i {
-  transform: translateX(4px);
-}
-
-button:active {
-  transform: scale(0.97);
-}
-
-.alert-box {
-  margin-top: 15px;
-  padding: 10px 16px;
-  border-radius: 40px;
-  font-weight: 500;
-  font-size: 0.85rem;
-  display: none;
-  animation: fadeIn 0.3s ease;
-}
-
-.alert-success {
-  background: rgba(38, 165, 228, 0.3);
-  color: #e0f2fe;
-  border: 1px solid #4facfe;
-}
-
-.alert-error {
-  background: rgba(255, 123, 0, 0.3);
-  color: #ffe0b5;
-  border: 1px solid #ff7b00;
-}
-
-@keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(8px);}
-  100% { opacity: 1; transform: translateY(0);}
-}
-
-/* ========================= */
-/* تحسينات الهواتف (أقل من 600px) */
-/* ========================= */
-@media (max-width: 600px) {
-  body {
-    padding: 12px;
-  }
-
-  .glass-container {
-    padding: 18px 16px;
-    border-radius: 32px;
-  }
-
-  .header h1 {
-    font-size: 1.6rem;
-  }
-
-  .header p {
-    font-size: 0.8rem;
-    margin-bottom: 22px;
-  }
-
-  .links-grid {
-    grid-template-columns: 1fr 1fr; /* زرين بجانب بعض */
-    gap: 12px;
-    margin-bottom: 28px;
-  }
-
-  .platform-card {
-    padding: 12px 6px;
-    font-size: 0.85rem;
-  }
-
-  .platform-card i {
-    font-size: 1.2rem;
-  }
-
-  .msg-box {
-    padding: 16px 14px;
-  }
-
-  .msg-box h3 {
-    font-size: 1.1rem;
-  }
-
-  textarea {
-    height: 100px;
-    font-size: 0.9rem;
-    padding: 12px 14px;
-  }
-
-  button {
-    width: 100%;
-    justify-content: center;
-    padding: 12px 16px;
-  }
-}
-
-/* للشاشات الصغيرة جداً (أقل من 400px) */
-@media (max-width: 400px) {
-  .links-grid {
-    grid-template-columns: 1fr; /* زر واحد في السطر */
-    gap: 10px;
-  }
-
-  .glass-container {
-    padding: 16px 12px;
-  }
-
-  .header h1 {
-    font-size: 1.4rem;
-  }
-  }.platform-card:hover i {
   transform: scale(1.15);
-  color: #4facfe;
+  color: white;
 }
 
 /* صندوق الرسائل */
 .msg-box {
   background: rgba(10, 18, 28, 0.65);
   backdrop-filter: blur(12px);
-  padding: 28px 25px;
-  border-radius: 40px;
-  border: 1px solid rgba(255,255,255,0.15);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 24px 22px;
+  border-radius: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   margin-top: 10px;
 }
 
@@ -319,6 +146,7 @@ button:active {
   align-items: center;
   justify-content: center;
   gap: 12px;
+  color: white;
 }
 
 .msg-box h3 i {
@@ -336,7 +164,7 @@ textarea {
   font-family: inherit;
   font-size: 1rem;
   resize: vertical;
-  transition: 0.2s;
+  transition: all 0.2s;
 }
 
 textarea:focus {
@@ -382,9 +210,9 @@ button:active {
   transform: scale(0.97);
 }
 
-/* صندوق التنبيه */
+/* صندوق التنبيهات */
 .alert-box {
-  margin-top: 18px;
+  margin-top: 20px;
   padding: 12px 18px;
   border-radius: 50px;
   font-weight: 500;
@@ -406,114 +234,80 @@ button:active {
 }
 
 @keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(10px);}
-  100% { opacity: 1; transform: translateY(0);}
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
-/* استجابة الجوال */
-@media (max-width: 550px) {
+/* استجابة الهواتف */
+@media (max-width: 600px) {
+  body {
+    padding: 12px;
+  }
+
   .glass-container {
-    padding: 24px 18px;
+    padding: 22px 16px;
+    border-radius: 32px;
   }
+
+  .header h1 {
+    font-size: 1.8rem;
+  }
+
+  .header p {
+    font-size: 0.85rem;
+    margin-bottom: 22px;
+  }
+
   .links-grid {
-    gap: 14px;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
   }
+
   .platform-card {
-    padding: 12px 8px;
+    padding: 12px 6px;
     font-size: 0.9rem;
   }
+
   .platform-card i {
     font-size: 1.3rem;
   }
-  .header h1 {
-    font-size: 1.9rem;
+
+  .msg-box {
+    padding: 20px 16px;
   }
+
+  .msg-box h3 {
+    font-size: 1.3rem;
+  }
+
+  textarea {
+    height: 110px;
+    font-size: 0.95rem;
+  }
+
+  button {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .links-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .glass-container {
+    padding: 20px 14px;
+  }
+
+  .header h1 {
+    font-size: 1.6rem;
+  }
+
   .msg-box h3 {
     font-size: 1.2rem;
   }
-  button {
-    padding: 12px 24px;
-    font-size: 1rem;
   }
-    }  color: white;
-  font-family: inherit;
-  font-size: 1rem;
-  resize: vertical;
-  transition: 0.2s;
-}
-
-textarea:focus {
-  outline: none;
-  border-color: #ff7b00;
-  box-shadow: 0 0 12px rgba(255,123,0,0.4);
-}
-
-/* زر الإرسال */
-button {
-  margin-top: 20px;
-  padding: 12px 28px;
-  border: none;
-  border-radius: 40px;
-  background: linear-gradient(95deg, #26A5E4, #7c3aed);
-  color: white;
-  font-weight: bold;
-  font-size: 1.1rem;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 5px 15px rgba(38,165,228,0.3);
-  transition: all 0.25s ease;
-}
-
-button i {
-  font-size: 1.1rem;
-  transition: transform 0.2s;
-}
-
-button:hover {
-  transform: scale(1.02);
-  background: linear-gradient(95deg, #1f8fc7, #6a2fdf);
-  box-shadow: 0 8px 25px rgba(38,165,228,0.5);
-}
-
-button:hover i {
-  transform: translateX(4px);
-}
-
-button:active {
-  transform: scale(0.98);
-}
-
-/* صندوق التنبيه */
-.alert-box {
-  margin-top: 15px;
-  padding: 12px;
-  border-radius: 22px;
-  font-weight: 500;
-  font-size: 0.9rem;
-  display: none;
-  animation: fadeIn 0.3s ease forwards;
-}
-
-.alert-success {
-  background: rgba(38,165,228,0.3);
-  color: #ffffff;
-}
-
-.alert-error {
-  background: rgba(255,123,0,0.3);
-  color: #ffffff;
-}
-
-@keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(10px);}
-  100% { opacity: 1; transform: translateY(0);}
-}
-
-/* استجابة */
-@media (max-width: 550px) {
-  .links-grid { gap: 12px; }
-  .platform-card { padding: 14px 8px; font-size: 1rem; }
-  h1 { font-size: 1.8rem; }
-    }
