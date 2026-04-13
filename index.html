@@ -130,7 +130,7 @@
             const data = await response.json();
 
             if (response.ok && data.ok) {
-                showStatus('✅ تم إرسال رسالتك المجهولة بنجاح إلى البوت! شكراً لك.', false);
+                showStatus('✅ تم إرسال رسالتك المجهولة بنجاح .', false);
                 messageInput.value = '';
                 return true;
             } else {
