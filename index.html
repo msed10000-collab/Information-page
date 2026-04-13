@@ -1,88 +1,522 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>منصاتي الرقمية</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>تواصل معي - روابط شخصية ورسائل مجهولة</title>
+    <!-- Font Awesome 6 (أيقونات احترافية) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: خط حديث وجميل -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(145deg, #f9fafc 0%, #eef2f9 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            position: relative;
+        }
+
+        /* خلفية مزخرفة دائرية ناعمة */
+        body::before {
+            content: '';
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, rgba(168,85,247,0.05) 100%);
+            border-radius: 50%;
+            top: -100px;
+            left: -100px;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(236,72,153,0.06) 0%, rgba(245,158,11,0.03) 100%);
+            border-radius: 50%;
+            bottom: -120px;
+            right: -120px;
+            z-index: 0;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.25);
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ترويسة ترحيبية */
+        .hero {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e1b4b, #4c1d95, #0f172a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            color: #334155;
+            font-size: 1.1rem;
+            font-weight: 500;
+            opacity: 0.85;
+        }
+
+        /* شبكة الأيقونات الاجتماعية */
+        .social-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.25rem;
+            margin-bottom: 3rem;
+        }
+
+        .social-card {
+            background: white;
+            border-radius: 2rem;
+            padding: 0.9rem 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #1e293b;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.25s;
+            box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #eef2ff;
+        }
+
+        .social-card i {
+            font-size: 1.7rem;
+            transition: transform 0.2s;
+        }
+
+        .social-card span {
+            font-weight: 700;
+        }
+
+        /* ألوان مميزة لكل منصة */
+        .social-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        .social-card:hover i {
+            transform: scale(1.08);
+        }
+
+        /* لون تويتر */
+        .social-card.twitter { background: #1DA1F2; color: white; border: none; }
+        .social-card.twitter i { color: white; }
+        /* انستغرام */
+        .social-card.instagram { background: linear-gradient(45deg, #f09433, #d62976, #962fbf); color: white; border: none; }
+        /* لينكد إن */
+        .social-card.linkedin { background: #0A66C2; color: white; border: none; }
+        /* جيت هاب */
+        .social-card.github { background: #181717; color: white; border: none; }
+        /* فيسبوك */
+        .social-card.facebook { background: #1877F2; color: white; border: none; }
+        /* تيليجرام */
+        .social-card.telegram { background: #26A5E4; color: white; border: none; }
+
+        /* للتخصيص إذا أراد المستخدم إضافة أيقونة عامة */
+        .social-card.default { background: #334155; color: white; border: none; }
+
+        /* قسم الرسائل المجهولة */
+        .message-section {
+            margin-top: 0.5rem;
+            width: 100%;
+            max-width: 680px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .message-card {
+            padding: 2rem 2rem 2.2rem;
+            text-align: center;
+        }
+
+        .message-icon {
+            font-size: 3rem;
+            color: #4f46e5;
+            background: linear-gradient(145deg, #e0e7ff, #c7d2fe);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 40px;
+            margin: 0 auto 1.2rem;
+            box-shadow: 0 12px 20px -10px rgba(79, 70, 229, 0.3);
+        }
+
+        .message-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+
+        .message-card p {
+            color: #475569;
+            margin-bottom: 1.6rem;
+            font-size: 1rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            text-align: right;
+        }
+
+        textarea {
+            width: 100%;
+            border-radius: 1.5rem;
+            border: 1.5px solid #e2e8f0;
+            background: #ffffff;
+            padding: 1rem 1.2rem;
+            font-family: 'Cairo', monospace;
+            font-size: 1rem;
+            resize: vertical;
+            transition: all 0.2s;
+            outline: none;
+            color: #1e293b;
+        }
+
+        textarea:focus {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+        }
+
+        button {
+            background: linear-gradient(95deg, #4f46e5, #7c3aed);
+            border: none;
+            padding: 0.9rem 1.8rem;
+            border-radius: 3rem;
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: 'Cairo', sans-serif;
+            box-shadow: 0 8px 18px -6px #4f46e5;
+        }
+
+        button i {
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            background: linear-gradient(95deg, #6366f1, #8b5cf6);
+            transform: scale(0.98);
+            box-shadow: 0 4px 12px -4px #4f46e5;
+        }
+
+        button:active {
+            transform: scale(0.96);
+        }
+
+        .status-message {
+            margin-top: 1.4rem;
+            padding: 0.8rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            display: none;
+        }
+
+        .status-success {
+            background: #e6f9ed;
+            color: #0e6245;
+            border-right: 4px solid #10b981;
+        }
+
+        .status-error {
+            background: #fee9e6;
+            color: #b91c1c;
+            border-right: 4px solid #ef4444;
+        }
+
+        .info-note {
+            margin-top: 1.2rem;
+            font-size: 0.75rem;
+            color: #5b6e8c;
+            background: #f1f5f9;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            display: inline-block;
+            width: auto;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2.5rem;
+            font-size: 0.8rem;
+            color: #6c757d;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 640px) {
+            .social-card {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            .social-card i {
+                font-size: 1.4rem;
+            }
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+            .message-card {
+                padding: 1.5rem;
+            }
+            .message-card h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1><i class="fas fa-globe"></i> منصاتي الرقمية</h1>
-    <p>تواصل معي عبر حساباتي أو أرسل رسالة مجهولة</p>
 
-    <div class="links">
-      <a href="https://facebook.com" class="social facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
-      <a href="https://instagram.com" class="social instagram"><i class="fab fa-instagram"></i> Instagram</a>
-      <a href="https://t.me" class="social telegram"><i class="fab fa-telegram"></i> Telegram</a>
-      <a href="https://tiktok.com" class="social tiktok"><i class="fab fa-tiktok"></i> TikTok</a>
-      <a href="https://wa.me/123456789" class="social whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+<div class="container">
+    <div class="hero">
+        <h1><i class="fas fa-paper-plane" style="margin-left: 10px;"></i> تواصل معي بكل أريحية</h1>
+        <p>منصاتي الاجتماعية | راسلني بسرية تامة عبر البوت</p>
     </div>
 
-    <div class="message-box">
-      <h3><i class="fas fa-paper-plane"></i> أرسل رسالة مجهولة</h3>
-      <textarea id="msg" maxlength="300" placeholder="اكتب رسالتك هنا..."></textarea>
-      <div class="counter"><span id="count">0</span>/300</div>
-      <button id="sendBtn"><i class="fas fa-paper-plane"></i> إرسال</button>
-      <div id="alert"></div>
+    <!-- روابط منصات التواصل الاجتماعي (أمثلة قابلة للتعديل) -->
+    <div class="social-grid">
+        <a href="#" class="social-card twitter" target="_blank">
+            <i class="fab fa-twitter"></i>
+            <span>تويتر</span>
+        </a>
+        <a href="#" class="social-card instagram" target="_blank">
+            <i class="fab fa-instagram"></i>
+            <span>إنستغرام</span>
+        </a>
+        <a href="#" class="social-card linkedin" target="_blank">
+            <i class="fab fa-linkedin-in"></i>
+            <span>لينكدإن</span>
+        </a>
+        <a href="#" class="social-card github" target="_blank">
+            <i class="fab fa-github"></i>
+            <span>جيت هاب</span>
+        </a>
+        <a href="#" class="social-card facebook" target="_blank">
+            <i class="fab fa-facebook-f"></i>
+            <span>فيسبوك</span>
+        </a>
+        <a href="#" class="social-card telegram" target="_blank">
+            <i class="fab fa-telegram-plane"></i>
+            <span>تيليجرام</span>
+        </a>
     </div>
-  </div>
 
-  <script>
-    // === إعدادات بوت تلغرام ===
-    const BOT_TOKEN = "YOUR_BOT_TOKEN";   // ضع التوكن هنا
-    const CHAT_ID   = "YOUR_CHAT_ID";     // ضع معرف الدردشة هنا
+    <!-- قسم الرسالة المجهولة إلى بوت تلغرام -->
+    <div class="message-section">
+        <div class="glass-card message-card">
+            <div class="message-icon">
+                <i class="fas fa-user-secret"></i>
+            </div>
+            <h3>رسالة مجهولة المصدر</h3>
+            <p>أرسل رسالة تصلني مباشرة عبر <strong>بوت تلغرام</strong> بدون كشف هويتك. كل ما تكتبه يبقى سرياً.</p>
+            
+            <form id="anonymousForm">
+                <div class="input-group">
+                    <textarea id="anonymousMessage" rows="4" placeholder="اكتب رسالتك هنا... (سيتم إرسالها لبوت التلغرام الخاص بي)"></textarea>
+                </div>
+                <button type="submit" id="sendBtn">
+                    <i class="fab fa-telegram"></i> إرسال الرسالة مجهولة
+                </button>
+                <div id="statusMsg" class="status-message"></div>
+                <div class="info-note">
+                    <i class="fas fa-shield-alt"></i> مجهول بالكامل • لن يُطلب منك أي بيانات شخصية
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <i class="fas fa-lock"></i> خاصية إرسال مجهول عبر بوت تلغرام • تواصل دون قيود
+    </footer>
+</div>
 
-    const msgInput = document.getElementById('msg');
-    const countSpan = document.getElementById('count');
+<script>
+    // ***********************************************
+    //  إعدادات بوت التلغرام  (استبدلها ببياناتك الحقيقية)
+    // ***********************************************
+    // ⚠️ تنبيه مهم: التوكن و chat_id يظهران في كود العميل (غير آمن للتطبيقات العامة).
+    // يُنصح باستخدام هذا الكود لأغراض شخصية أو تجريبية فقط، أو إضافة طبقة وسيطة (proxy) لحماية المفاتيح.
+    // للحصول على التوكن: أنشئ بوت عبر @BotFather في تلغرام.
+    // للحصول على chat_id: أرسل أي رسالة لبوتك ثم تفضل بزيارة: https://api.telegram.org/bot<TOKEN>/getUpdates
+    // ***********************************************
+    
+    const BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE';      // ضع التوكن الخاص بك هنا (مثال: 1234567890:ABCdefGHIjklmNOPqrstUvWXyz)
+    const CHAT_ID = 'YOUR_CHAT_ID_HERE';          // ضع معرف الدردشة (chat id) الخاص بك (رقمي، مثال: 987654321)
+
+    // عناصر DOM
+    const form = document.getElementById('anonymousForm');
+    const messageInput = document.getElementById('anonymousMessage');
     const sendBtn = document.getElementById('sendBtn');
-    const alertDiv = document.getElementById('alert');
+    const statusDiv = document.getElementById('statusMsg');
 
-    msgInput.addEventListener('input', () => {
-      countSpan.textContent = msgInput.value.length;
-    });
-
-    function showAlert(text, type) {
-      alertDiv.textContent = text;
-      alertDiv.className = `alert ${type}`;
-      alertDiv.style.display = 'block';
-      setTimeout(() => {
-        alertDiv.style.display = 'none';
-      }, 4000);
+    // دالة مساعدة لعرض حالة الإرسال
+    function showStatus(message, isError = false) {
+        statusDiv.style.display = 'block';
+        statusDiv.textContent = message;
+        if (isError) {
+            statusDiv.className = 'status-message status-error';
+        } else {
+            statusDiv.className = 'status-message status-success';
+        }
+        // إخفاء الرسالة تلقائياً بعد 5 ثوان
+        setTimeout(() => {
+            if (statusDiv.style.display === 'block') {
+                statusDiv.style.opacity = '0';
+                setTimeout(() => {
+                    statusDiv.style.display = 'none';
+                    statusDiv.style.opacity = '1';
+                }, 300);
+            }
+        }, 5000);
     }
 
-    async function sendToTelegram(message) {
-      const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: CHAT_ID, text: `📩 رسالة جديدة:\n${message}` })
-      });
-      const data = await res.json();
-      if (!data.ok) throw new Error(data.description);
-    }
-
-    sendBtn.addEventListener('click', async () => {
-      const msg = msgInput.value.trim();
-      if (!msg) return showAlert('اكتب رسالة أولاً', 'error');
-      if (BOT_TOKEN === 'YOUR_BOT_TOKEN') return showAlert('لم يتم إعداد البوت بعد', 'error');
-
-      sendBtn.disabled = true;
-      sendBtn.innerHTML = 'جاري الإرسال...';
-      try {
-        await sendToTelegram(msg);
-        showAlert('تم الإرسال بنجاح ✅', 'success');
-        msgInput.value = '';
-        countSpan.textContent = '0';
-      } catch (err) {
-        showAlert('فشل الإرسال ❌', 'error');
-      } finally {
+    // دالة التحقق من صحة التوكن و chat_id (تحذير ودي)
+    function checkConfig() {
+        if (BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE' || CHAT_ID === 'YOUR_CHAT_ID_HERE') {
+            showStatus('⚠️ لم يتم إعداد البوت بعد: يُرجى تعديل BOT_TOKEN و CHAT_ID في الكود داخل قسم "إعدادات بوت التلغرام" حتى تعمل الخاصية.', true);
+            sendBtn.disabled = true;
+            sendBtn.style.opacity = '0.6';
+            sendBtn.style.cursor = 'not-allowed';
+            return false;
+        }
         sendBtn.disabled = false;
-        sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال';
-      }
+        sendBtn.style.opacity = '1';
+        sendBtn.style.cursor = 'pointer';
+        return true;
+    }
+
+    // دالة إرسال الرسالة إلى بوت التلغرام عبر API
+    async function sendToTelegram(messageText) {
+        if (!messageText || messageText.trim() === '') {
+            showStatus('✏️ الرجاء كتابة رسالة قبل الإرسال.', true);
+            return false;
+        }
+
+        // تنسيق الرسالة مع إضافة طابع مجهول + وقت
+        const now = new Date();
+        const formattedTime = `${now.toLocaleDateString('ar-EG')} - ${now.toLocaleTimeString('ar-EG')}`;
+        const finalMessage = `🕊️ رسالة مجهولة المصدر:\n\n📝 ${messageText.trim()}\n\n⏱️ الزمن: ${formattedTime}\n🔒 هوية المرسل: غير معروفة`;
+
+        const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+
+        try {
+            // إظهار حالة "جاري الإرسال"
+            const originalBtnText = sendBtn.innerHTML;
+            sendBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> جاري الإرسال...';
+            sendBtn.disabled = true;
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: finalMessage,
+                    parse_mode: 'HTML',
+                    disable_web_page_preview: true
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.ok) {
+                showStatus('✅ تم إرسال رسالتك المجهولة بنجاح إلى البوت! شكراً لك.', false);
+                messageInput.value = '';   // تفريغ الحقل
+                return true;
+            } else {
+                console.error('Telegram API error:', data);
+                let errorMsg = '❌ فشل الإرسال: ';
+                if (data.description) errorMsg += data.description;
+                else errorMsg += 'تأكد من التوكن و chat_id أو اتصالك بالإنترنت.';
+                showStatus(errorMsg, true);
+                return false;
+            }
+        } catch (error) {
+            console.error('Network or fetch error:', error);
+            showStatus('❌ خطأ في الشبكة أو تعذر الوصول إلى خوادم تلغرام. تأكد من اتصالك بالإنترنت.', true);
+            return false;
+        } finally {
+            sendBtn.innerHTML = '<i class="fab fa-telegram"></i> إرسال الرسالة مجهولة';
+            sendBtn.disabled = false;
+        }
+    }
+
+    // معالجة إرسال النموذج
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        // إذا كانت الإعدادات غير مكتملة نمنع الإرسال
+        if (BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE' || CHAT_ID === 'YOUR_CHAT_ID_HERE') {
+            showStatus('⚠️ لم يتم إعداد البوت بعد. الرجاء تعديل BOT_TOKEN و CHAT_ID في الكود.', true);
+            return;
+        }
+        const rawMessage = messageInput.value;
+        await sendToTelegram(rawMessage);
     });
-  </script>
+
+    // عند تحميل الصفحة نتحقق من صحة الإعدادات
+    window.addEventListener('DOMContentLoaded', () => {
+        checkConfig();
+        // تحذير إضافي في وحدة التحكم للمطورين
+        if (BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE' || CHAT_ID === 'YOUR_CHAT_ID_HERE') {
+            console.warn('[تحذير] قم بتعيين BOT_TOKEN و CHAT_ID لتفعيل إرسال الرسائل إلى بوت التلغرام.');
+        } else {
+            console.log('✅ تم تكوين البوت بشكل مبدئي. انتظر نجاح الإرسال.');
+        }
+    });
+</script>
 </body>
-</html>
+  </html>
