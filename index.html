@@ -2,349 +2,83 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>✨ منصاتي | تواصل عبر تليغرام ✨</title>
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Custom CSS خارجي -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>منصاتي الرقمية</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+  <div class="container">
+    <h1><i class="fas fa-globe"></i> منصاتي الرقمية</h1>
+    <p>تواصل معي عبر حساباتي أو أرسل رسالة مجهولة</p>
 
-<div class="bg-animation"></div>
-<div class="theme-toggle">
-  <i class="fas fa-moon"></i>
-  <i class="fas fa-sun"></i>
-  <div class="toggle-ball"></div>
-</div>
+    <div class="links">
+      <a href="https://facebook.com" class="social facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
+      <a href="https://instagram.com" class="social instagram"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="https://t.me" class="social telegram"><i class="fab fa-telegram"></i> Telegram</a>
+      <a href="https://tiktok.com" class="social tiktok"><i class="fab fa-tiktok"></i> TikTok</a>
+      <a href="https://wa.me/123456789" class="social whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    </div>
 
-<div class="glass-container">
-  <div class="header">
-    <div class="avatar"><i class="fas fa-user-astronaut"></i></div>
-    <h1>✨ منصاتي الرقمية ✨</h1>
-    <p>🍀 أرسل رسالة مجهولة – سيصل رد البوت تلقائياً 🍀</p>
-  </div>
-
-  <div class="links-grid">
-    <a href="https://facebook.com/" class="card fb" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
-    <a href="https://instagram.com/" class="card insta" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-    <a href="https://t.me/" class="card tele" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
-    <a href="https://tiktok.com/" class="card tiktok" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
-    <a href="https://wa.me/1234567890" class="card whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-  </div>
-
-  <div class="msg-box">
-    <h3><i class="fas fa-paper-plane"></i> أرسل رسالة مجهولة</h3>
-    <textarea id="msg" maxlength="300" placeholder="اكتب رسالتك هنا... (ستُرسل إلى بوت تليغرام)"></textarea>
-    <div class="counter"><span id="count">0</span>/300</div>
-    <button id="sendBtn"><i class="fas fa-paper-plane"></i> إرسال للبوت</button>
-    <div id="alertBox"></div>
-
-    <!-- قسم لعرض رد البوت -->
-    <div id="replyContainer" class="reply-area" style="display: none;">
-      <i class="fas fa-robot"></i> <strong>رد البوت:</strong>
-      <div id="replyText" class="reply-text"></div>
+    <div class="message-box">
+      <h3><i class="fas fa-paper-plane"></i> أرسل رسالة مجهولة</h3>
+      <textarea id="msg" maxlength="300" placeholder="اكتب رسالتك هنا..."></textarea>
+      <div class="counter"><span id="count">0</span>/300</div>
+      <button id="sendBtn"><i class="fas fa-paper-plane"></i> إرسال</button>
+      <div id="alert"></div>
     </div>
   </div>
-</div>
 
-<script>
-  (function() {
-    // ⚠️ ضع توكن بوت تليغرام و Chat ID الخاص بك هنا ⚠️
-    const BOT_TOKEN = "YOUR_BOT_TOKEN";      // مثال: "1234567890:ABCdefGHIjklmNOPqrstUvWXyz"
-    const CHAT_ID   = "YOUR_CHAT_ID";        // مثال: "987654321"
+  <script>
+    // === إعدادات بوت تلغرام ===
+    const BOT_TOKEN = "YOUR_BOT_TOKEN";   // ضع التوكن هنا
+    const CHAT_ID   = "YOUR_CHAT_ID";     // ضع معرف الدردشة هنا
 
-    const msgTextarea = document.getElementById("msg");
-    const countSpan = document.getElementById("count");
-    const sendBtn = document.getElementById("sendBtn");
-    const alertBox = document.getElementById("alertBox");
-    const replyContainer = document.getElementById("replyContainer");
-    const replyTextDiv = document.getElementById("replyText");
+    const msgInput = document.getElementById('msg');
+    const countSpan = document.getElementById('count');
+    const sendBtn = document.getElementById('sendBtn');
+    const alertDiv = document.getElementById('alert');
+
+    msgInput.addEventListener('input', () => {
+      countSpan.textContent = msgInput.value.length;
+    });
 
     function showAlert(text, type) {
-      alertBox.textContent = text;
-      alertBox.className = `alert ${type}`;
-      alertBox.style.display = "block";
+      alertDiv.textContent = text;
+      alertDiv.className = `alert ${type}`;
+      alertDiv.style.display = 'block';
       setTimeout(() => {
-        alertBox.style.opacity = "0";
-        setTimeout(() => {
-          alertBox.style.display = "none";
-          alertBox.style.opacity = "1";
-        }, 300);
+        alertDiv.style.display = 'none';
       }, 4000);
     }
 
     async function sendToTelegram(message) {
       const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-      const params = {
-        chat_id: CHAT_ID,
-        text: `📩 رسالة مجهولة جديدة:\n\n${message}`,
-        parse_mode: "HTML"
-      };
       const res = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(params)
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: CHAT_ID, text: `📩 رسالة جديدة:\n${message}` })
       });
       const data = await res.json();
-      if (!data.ok) throw new Error(data.description || "فشل الإرسال");
-      return data;
+      if (!data.ok) throw new Error(data.description);
     }
 
-    async function fetchLastBotReply() {
-      const url = `https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?limit=1&offset=-1`;
-      const res = await fetch(url);
-      const data = await res.json();
-      if (data.ok && data.result.length > 0) {
-        const lastUpdate = data.result[data.result.length - 1];
-        if (lastUpdate.message && lastUpdate.message.from && lastUpdate.message.from.is_bot && lastUpdate.message.chat.id.toString() === CHAT_ID) {
-          return lastUpdate.message.text;
-        }
-      }
-      return null;
-    }
-
-    async function showBotReply() {
-      try {
-        const reply = await fetchLastBotReply();
-        if (reply) {
-          replyTextDiv.innerText = reply;
-          replyContainer.style.display = "block";
-          setTimeout(() => {
-            replyContainer.style.display = "none";
-          }, 10000);
-        } else {
-          replyTextDiv.innerText = "✅ تم إرسال رسالتك. سيتم الرد من قبل البوت قريباً.";
-          replyContainer.style.display = "block";
-          setTimeout(() => {
-            replyContainer.style.display = "none";
-          }, 8000);
-        }
-      } catch (err) {
-        console.warn("خطأ في جلب الرد", err);
-      }
-    }
-
-    sendBtn.addEventListener("click", async () => {
-      const message = msgTextarea.value.trim();
-      if (message === "") {
-        showAlert("✏️ اكتب رسالة أولاً", "error");
-        return;
-      }
-      if (BOT_TOKEN === "YOUR_BOT_TOKEN" || CHAT_ID === "YOUR_CHAT_ID") {
-        showAlert("⚠️ الرجاء إدخال توكن البوت و Chat ID في الكود أولاً", "error");
-        return;
-      }
+    sendBtn.addEventListener('click', async () => {
+      const msg = msgInput.value.trim();
+      if (!msg) return showAlert('اكتب رسالة أولاً', 'error');
+      if (BOT_TOKEN === 'YOUR_BOT_TOKEN') return showAlert('لم يتم إعداد البوت بعد', 'error');
 
       sendBtn.disabled = true;
-      sendBtn.innerHTML = "⏳ جاري الإرسال إلى البوت...";
-
+      sendBtn.innerHTML = 'جاري الإرسال...';
       try {
-        await sendToTelegram(message);
-        showAlert("✅ تم إرسال رسالتك إلى البوت بنجاح!", "success");
-        msgTextarea.value = "";
-        countSpan.textContent = "0";
-        setTimeout(async () => {
-          await showBotReply();
-        }, 2000);
+        await sendToTelegram(msg);
+        showAlert('تم الإرسال بنجاح ✅', 'success');
+        msgInput.value = '';
+        countSpan.textContent = '0';
       } catch (err) {
-        console.error(err);
-        showAlert("❌ فشل الإرسال: " + err.message, "error");
+        showAlert('فشل الإرسال ❌', 'error');
       } finally {
-        sendBtn.disabled = false;
-        sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال للبوت';
-      }
-    });
-
-    msgTextarea.addEventListener("input", () => {
-      countSpan.textContent = msgTextarea.value.length;
-    });
-
-    const themeToggle = document.querySelector('.theme-toggle');
-    const body = document.body;
-    function setTheme(theme) {
-      if (theme === 'dark') { body.classList.add('dark-mode'); localStorage.setItem('theme', 'dark'); }
-      else { body.classList.remove('dark-mode'); localStorage.setItem('theme', 'light'); }
-    }
-    function initTheme() {
-      const saved = localStorage.getItem('theme');
-      if (saved === 'dark') setTheme('dark');
-      else setTheme('light');
-    }
-    themeToggle?.addEventListener('click', () => {
-      if (body.classList.contains('dark-mode')) setTheme('light');
-      else setTheme('dark');
-    });
-    initTheme();
-  })();
-</script>
-</body>
-</html>        let html = '';
-        messages.slice().reverse().forEach((msg, idx) => {  // الأحدث أولاً
-          const originalIndex = messages.length - 1 - idx;
-          const date = new Date(msg.timestamp);
-          const formattedDate = `${date.toLocaleDateString('ar-EG')} ${date.toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'})}`;
-          html += `
-            <div class="msg-card">
-              <div class="msg-content">${escapeHtml(msg.text)}</div>
-              <div class="msg-meta">
-                <span><i class="far fa-clock"></i> ${formattedDate}</span>
-                <button class="delete-msg" data-index="${originalIndex}"><i class="fas fa-trash-alt"></i> حذف</button>
-              </div>
-            </div>
-          `;
-        });
-        messagesListDiv.innerHTML = html;
-        // إضافة مستمعي حذف لكل زر
-        document.querySelectorAll('.delete-msg').forEach(btn => {
-          btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const idx = parseInt(btn.getAttribute('data-index'));
-            if(!isNaN(idx)) {
-              if(confirm('هل تريد حذف هذه الرسالة؟')) {
-                messages.splice(idx, 1);
-                saveMessages();
-                showAlert("🗑️ تم حذف الرسالة", "success");
-              }
-            }
-          });
-        });
-      }
-
-      // دالة بسيطة لتفادي XSS
-      function escapeHtml(str) {
-        return str.replace(/[&<>]/g, function(m) {
-          if(m === '&') return '&amp;';
-          if(m === '<') return '&lt;';
-          if(m === '>') return '&gt;';
-          return m;
-        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
-          return c;
-        });
-      }
-
-      // ------------------- إضافة رسالة جديدة -------------------
-      function addMessage(text) {
-        if(!text.trim()) return false;
-        const newMsg = {
-          id: Date.now(),
-          text: text.trim(),
-          timestamp: new Date().toISOString()
-        };
-        messages.push(newMsg);
-        saveMessages();
-        return true;
-      }
-
-      // ------------------- التنبيهات -------------------
-      function showAlert(text, type) {
-        alertBox.textContent = text;
-        alertBox.className = `alert ${type}`;
-        alertBox.style.display = "block";
-        setTimeout(() => {
-          alertBox.style.opacity = "0";
-          setTimeout(() => {
-            alertBox.style.display = "none";
-            alertBox.style.opacity = "1";
-          }, 300);
-        }, 3500);
-      }
-
-      // ------------------- حدث الإرسال -------------------
-      sendBtn.addEventListener("click", () => {
-        const message = msgTextarea.value.trim();
-        if(message === "") {
-          showAlert("✏️ اكتب رسالة أولاً", "error");
-          return;
-        }
-        // إضافة الرسالة
-        const success = addMessage(message);
-        if(success) {
-          showAlert("✅ تم الإرسال بنجاح! (محفوظ محلياً)", "success");
-          msgTextarea.value = "";
-          countSpan.textContent = "0";
-        } else {
-          showAlert("⚠️ حدث خطأ", "error");
-        }
-      });
-
-      // عداد الأحرف
-      msgTextarea.addEventListener("input", () => {
-        countSpan.textContent = msgTextarea.value.length;
-      });
-
-      // مسح الكل
-      clearAllBtn.addEventListener("click", () => {
-        if(messages.length === 0) {
-          showAlert("📭 لا توجد رسائل لمسحها", "error");
-          return;
-        }
-        if(confirm("⚠️ هل أنت متأكد؟ سيتم حذف جميع الرسائل نهائياً.")) {
-          messages = [];
-          saveMessages();
-          showAlert("🗑️ تم مسح جميع الرسائل", "success");
-        }
-      });
-
-      // ------------------- الوضع الليلي / النهاري -------------------
-      const themeToggle = document.querySelector('.theme-toggle');
-      const body = document.body;
-      function setTheme(theme) {
-        if(theme === 'dark') {
-          body.classList.add('dark-mode');
-          localStorage.setItem('theme', 'dark');
-        } else {
-          body.classList.remove('dark-mode');
-          localStorage.setItem('theme', 'light');
-        }
-      }
-      function initTheme() {
-        const savedTheme = localStorage.getItem('theme');
-        if(savedTheme === 'dark') setTheme('dark');
-        else setTheme('light');
-      }
-      themeToggle?.addEventListener('click', () => {
-        if(body.classList.contains('dark-mode')) setTheme('light');
-        else setTheme('dark');
-      });
-      initTheme();
-
-      // تحميل أولي
-      loadMessages();
-    })();
-  </script>
-</body>
-</html>        parse_mode: 'HTML'
-      };
-
-      try {
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        const data = await response.json();
-        if (data.ok) {
-          showAlert('✅ تم إرسال رسالتك بنجاح! شكراً لك', 'success');
-          msgInput.value = '';
-        } else {
-          console.error('خطأ من التلغرام:', data);
-          let errorMsg = '❌ فشل الإرسال: ';
-          if (data.description.includes('chat not found')) {
-            errorMsg += 'لم يتم العثور على المحادثة. تأكد من أنك أرسلت رسالة للبوت أولاً.';
-          } else if (data.description.includes('Forbidden')) {
-            errorMsg += 'البوت ليس لديه صلاحية الإرسال. ابدأ المحادثة مع البوت.';
-          } else {
-            errorMsg += data.description;
-          }
-          showAlert(errorMsg, 'error');
-        }
-      } catch (error) {
-        console.error('خطأ في الشبكة:', error);
-        showAlert('⚠️ خطأ في الاتصال بالإنترنت أو الخادم، حاول مرة أخرى', 'error');
-      } finally {
-        isSending = false;
         sendBtn.disabled = false;
         sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال';
       }
