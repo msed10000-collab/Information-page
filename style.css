@@ -1,116 +1,121 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* Background */
 body {
+  margin: 0;
   font-family: 'Poppins', 'Tajawal', sans-serif;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
-  background: radial-gradient(circle at 10% 20%, #0a0f1a, #0b1220);
-  position: relative;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: #ffffff;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: radial-gradient(rgba(79, 172, 254, 0.08) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none;
-  z-index: 0;
+/* Container */
+.container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  animation: fadeIn 1s ease;
 }
 
-.glass-container {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 950px;
-  background: rgba(15, 25, 45, 0.45);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-radius: 40px;
-  padding: 28px 24px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4);
-  transition: all 0.3s;
+/* Fade animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.header h1 {
-  font-size: 2.2rem;
-  background: linear-gradient(135deg, #fff, #4facfe, #00c6fb);
+/* Title */
+h1 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #4facfe, #7b2ff7);
   -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-bottom: 8px;
-  font-weight: 700;
+  -webkit-text-fill-color: transparent;
 }
 
-.header p {
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.75);
-  margin-bottom: 28px;
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
-  display: inline-block;
-  padding-bottom: 8px;
+/* Subtitle */
+p {
+  text-align: center;
+  color: #94a3b8;
+  margin-bottom: 25px;
 }
 
-/* شبكة الروابط */
-.links-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 18px;
-  margin-bottom: 35px;
-}
-
-.platform-card {
-  padding: 14px 10px;
-  border-radius: 50px;
-  text-decoration: none;
-  color: white;
-  font-weight: 600;
-  font-size: 1rem;
+/* Glass Buttons */
+.btn {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  transition: all 0.25s ease;
-  background: rgba(20, 30, 50, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(5px);
+  padding: 15px;
+  margin: 12px 0;
+  border-radius: 20px;
+  color: #fff;
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: 0.3s;
 }
 
-.platform-card i {
-  font-size: 1.5rem;
-  transition: all 0.2s;
+/* Glow hover */
+.btn:hover {
+  background: linear-gradient(135deg, #4facfe, #7b2ff7);
+  box-shadow: 0 0 20px rgba(123,47,247,0.6);
+  transform: translateY(-3px);
 }
 
-/* تأثيرات hover لكل منصة */
-.fb-card:hover {
-  background: #1877f2;
-  transform: translateY(-4px);
-  box-shadow: 0 15px 25px -8px #1877f2;
-  border-color: transparent;
+/* Textarea */
+textarea {
+  width: 100%;
+  height: 120px;
+  border-radius: 15px;
+  padding: 15px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: white;
+  outline: none;
+  transition: 0.3s;
 }
 
-.insta-card:hover {
-  background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af);
-  transform: translateY(-4px);
-  box-shadow: 0 15px 25px -8px #dd2a7b;
-  border-color: transparent;
+/* Focus glow */
+textarea:focus {
+  border-color: #7b2ff7;
+  box-shadow: 0 0 10px rgba(123,47,247,0.5);
 }
 
-.tele-card:hover {
-  background: #0088cc;
-  transform: translateY(-4px);
+/* Send Button */
+.send-btn {
+  width: 100%;
+  padding: 15px;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(135deg, #4facfe, #7b2ff7);
+  color: white;
+  font-size: 18px;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Button hover effect */
+.send-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(79,172,254,0.7);
+}
+
+/* Warning */
+.warning {
+  background: rgba(255, 0, 0, 0.1);
+  color: #ff6b6b;
+  padding: 12px;
+  border-radius: 12px;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 14px;
+  animation: fadeIn 1s ease;
+}  transform: translateY(-4px);
   box-shadow: 0 15px 25px -8px #0088cc;
   border-color: transparent;
 }
